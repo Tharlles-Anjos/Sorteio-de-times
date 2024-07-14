@@ -1,0 +1,56 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Jogadores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Jogadores Cadastrados</h1>
+    <ul id="lista-jogadores">
+        <!-- Lista de jogadores será carregada aqui -->
+    </ul>
+
+    <!-- Script para buscar e exibir jogadores -->
+    <script>
+        async function carregarJogadores() {
+            const response = await fetch('/listar-jogadores');
+            const jogadores = await response.json();
+
+            const listaJogadores = document.getElementById('lista-jogadores');
+            listaJogadores.innerHTML = '';
+            
+            jogadores.forEach(jogador => {
+                const li = document.createElement('li');
+                li.textContent = jogador.name;
+                listaJogadores.appendChild(li);
+            });
+        }
+
+        // Carregar jogadores ao carregar a página
+        carregarJogadores();
+    </script>
+</body>
+</html>
