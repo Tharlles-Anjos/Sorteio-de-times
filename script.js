@@ -1,3 +1,5 @@
+// scripts.js
+
 const players = [];
 
 function addPlayer() {
@@ -6,6 +8,15 @@ function addPlayer() {
         players.push(playerName);
         document.getElementById('playerName').value = '';
         alert(`Jogador ${playerName} adicionado!`);
+
+        // Verifica se o número de jogadores atingiu o limite para exibir mensagem
+        const numPlayersPerTeam = parseInt(document.getElementById('numPlayersPerTeam').value);
+        const numTeams = parseInt(document.getElementById('numTeams').value);
+        const totalPlayersNeeded = numPlayersPerTeam * numTeams;
+
+        if (players.length >= totalPlayersNeeded) {
+            alert(`Número de jogadores atingido (${players.length}). Faça o sorteio!`);
+        }
     } else {
         alert('Por favor, insira o nome do jogador.');
     }
